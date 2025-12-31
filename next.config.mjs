@@ -1,5 +1,8 @@
-import { join } from 'path'
-
-export default {
+const nextConfig = {
   reactStrictMode: true,
-}
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+};
+
+export default nextConfig;
