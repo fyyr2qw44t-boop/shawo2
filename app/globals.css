@@ -1,0 +1,488 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;600;700&family=Libre+Franklin:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './heading-styles.css';
+
+:root {
+    --cream: #fbf6f3;
+    --warmgray: #efebe8;
+    --forest: #213a2f;
+    --navy: #162836;
+    --oxblood: #5a2e2a;
+    --mutedgold: #bfa67a;
+    /* marquee control */
+    --marquee-duration: 20s;
+    --marquee-delay: 0s;
+}
+
+html,
+body {
+    height: 100%
+}
+
+body {
+    @apply bg-cream text-gray-900;
+    font-family: 'Libre Franklin', Inter, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* heading utility uses Playfair Display for refined serif */
+.font-heading {
+    font-family: 'Cinzel', 'Playfair Display', Georgia, serif
+}
+
+/* alternate serif used in headings across the app (used by pages) */
+.font-serifEleg {
+    font-family: 'Playfair Display', 'Cinzel', Georgia, serif;
+    font-weight: 600;
+}
+
+/* Viking / heritage accents */
+.rune {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.08em
+}
+
+.max-w-6xl {
+    max-width: 72rem
+}
+
+/* subtle button */
+.btn-quiet {
+    @apply inline-block px-6 py-2 border text-sm bg-white/95;
+    color: var(--forest);
+    border-color: rgba(33, 58, 47, 0.08);
+}
+
+.luxury-cta {
+    @apply inline-block px-6 py-2 border text-sm bg-white/95;
+    color: var(--forest);
+    border-color: rgba(33, 58, 47, 0.12);
+}
+
+/* muted helper */
+.muted {
+    color: rgba(33, 58, 47, 0.45)
+}
+
+/* glass / card styles for premium feel */
+.glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.card-lux {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.03));
+    border-radius: 0.75rem;
+}
+
+.shadow-lux {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45)
+}
+
+.text-mutedgold {
+    color: var(--mutedgold)
+}
+
+/* default img behavior to improve responsiveness */
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* layout helpers to reduce asymmetry */
+.container {
+    @apply max-w-6xl mx-auto px-6
+}
+
+.section-inner {
+    @apply max-w-5xl mx-auto px-4
+}
+
+/* unified card for product/collection previews */
+.card-item {
+    @apply rounded-lg overflow-hidden shadow-lg bg-transparent;
+}
+
+.card-caption {
+    @apply py-3 flex items-center justify-between text-sm
+}
+
+.card-badge {
+    @apply text-xs bg-white/10 text-mutedgold px-3 py-1 rounded-full
+}
+
+/* Story / product preview tweaks: smoother overlay transitions and responsive grid helper */
+.card-item > .absolute {
+    transition: opacity .28s ease, transform .35s cubic-bezier(.2,.9,.3,1);
+    transform: translateY(6%);
+}
+.card-item.group:hover > .absolute,
+.card-item.group:focus-within > .absolute {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.stories-grid {
+    display: grid;
+    gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+    .stories-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* responsive card image heights to reduce visual asymmetry */
+.card-item img, .card-item>img, .card-item picture img {
+    height: 18rem;
+    object-fit: cover;
+}
+
+@media (min-width: 768px) {
+
+    .card-item img,
+    .card-item>img,
+    .card-item picture img {
+        height: 24rem;
+    }
+}
+    /* Modal and thumbnail styles for CollectionCard */
+    .modal-main-img {
+        object-fit: cover;
+        /* shift image up a few pixels to crop small bottom logos without heavy cropping */
+        object-position: center calc(50% - 6px);
+        transition: transform .35s ease;
+    }
+
+    .modal-thumb {
+        width: 80px;
+        height: 80px;
+        padding: 0;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        background: rgba(255,255,255,0.02);
+    }
+
+    .modal-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* slight upward shift to crop a few pixels from bottom (gentle) */
+        object-position: center calc(50% - 4px);
+        transition: transform .25s ease;
+    }
+
+    .modal-thumb img:hover {
+        transform: scale(1.06);
+    }
+
+    /* focus visible for modal interactive elements */
+    .focus-visible\:outline-none:focus-visible {
+        outline: 3px solid var(--mutedgold);
+        outline-offset: 3px;
+    }
+
+/* Modal backdrop and panel matched to site profile */
+.modal-backdrop {
+    background: linear-gradient(180deg, rgba(22, 40, 54, 0.6), rgba(33, 58, 47, 0.55));
+    backdrop-filter: blur(6px) saturate(1.05);
+}
+
+.modal-panel {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
+    border: 1px solid rgba(191,166,122,0.12);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+    border-radius: 0.75rem;
+}
+
+/* subtle inner accent */
+.modal-panel .text-mutedgold {
+    color: var(--mutedgold);
+}
+
+/* Story modal: make background subtle and de-emphasize page content */
+.story-modal-backdrop {
+    background: rgba(6,8,10,0.6);
+    backdrop-filter: blur(8px) saturate(0.6) brightness(0.6);
+}
+
+.story-modal-panel {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.story-modal-panel img.object-position-cover {
+    object-position: center calc(50% - 6px);
+}
+
+/* subtle text weight for story content */
+.story-modal-panel .leading-relaxed{
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.95);
+}
+
+/* Legal / policy readability improvements */
+.legal-panel {
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+.prose-invert h2 {
+    color: var(--mutedgold);
+    font-weight: 600;
+    margin-top: 1.25rem;
+}
+
+.prose-invert p {
+    color: rgba(255,255,255,0.95);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.prose-invert a {
+    color: var(--mutedgold);
+    text-decoration: underline;
+}
+
+
+
+
+/* Marquee / strip-style collection gallery (auto-scroll left) */
+.marquee {
+    overflow: hidden;
+    position: relative;
+}
+
+.marquee-track {
+    display: flex;
+    gap: 1rem;
+    align-items: stretch;
+    animation: marquee-left var(--marquee-duration, 20s) linear infinite;
+    animation-delay: var(--marquee-delay, 0s);
+    transform: translateX(0);
+    will-change: transform;
+    animation-play-state: running;
+    /* ensure children do not shrink and layout as a single row */
+}
+
+.marquee-track > * {
+    flex: 0 0 auto;
+} 
+
+.marquee-card {
+    display: inline-flex;
+    flex-direction: column;
+    width: 14rem;
+    min-width: 14rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transform: translateZ(0);
+}
+
+.marquee-thumb {
+    height: 10rem;
+    overflow: hidden;
+}
+
+.marquee-meta {
+    padding: 0.65rem 0.75rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    border-top: 1px solid rgba(255,255,255,0.03);
+}
+
+@keyframes marquee-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* pause on hover/focus */
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+}
+
+/* smaller card on narrow screens */
+@media (max-width: 640px) {
+    .marquee-card { width: 12rem; min-width: 12rem; }
+    .marquee-thumb { height: 8rem }
+}
+
+/* about hero frame and caption */
+.about-hero-frame {
+    border: 1px solid rgba(255, 215, 0, 0.08);
+    padding: 6px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.03));
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    border-radius: 8px;
+}
+
+.about-hero-frame img {
+    border-radius: 0.5rem;
+    display: block
+}
+
+.about-hero-caption {
+    color: var(--mutedgold);
+    opacity: 0.9;
+}
+
+/* Custom brand fonts - you added .otf/.ttf files into /public/fonts/
+   Recommended filenames (update if yours differ):
+   - sephir.otf or sephir.ttf          -> font-family: 'Sephir'
+   - dahlianti-angelina.otf or .ttf    -> font-family: 'DahliantiAngelina' */
+
+@font-face {
+    font-family: 'Sephir';
+    src: url('/fonts/sephir.otf') format('opentype'),
+        url('/fonts/sephir.ttf') format('truetype');
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DahliantiAngelina';
+    src: url('/fonts/Dahlianti.otf') format('opentype'),
+        url('/fonts/Dahlianti.ttf') format('truetype');
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ShinyText component simple style (was in components/ShinyText.css) */
+.shiny-text {
+    display: inline-block;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* CSS keyframes for shiny animation */
+@keyframes shiny-move {
+  0% { background-position: 150% center; }
+  100% { background-position: -50% center; }
+}
+
+/* Pause on hover helper */
+.shiny-pause-on-hover:hover {
+  animation-play-state: paused !important;
+}
+
+/* Logo classes for header: 'suede' sits lower-right of 'shawo' and is larger.
+   The container is centered by the header's 'text-center' wrapper. */
+
+.brand-logo {
+    position: relative;
+    display: inline-block;
+    padding-right: 0.5rem
+}
+
+.brand-logo .logo-shawo {
+    font-family: 'Sephir', 'Cinzel', serif;
+    font-size: 1.5rem;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+    display: block;
+    line-height: 1;
+}
+
+.brand-logo .logo-suede {
+    font-family: 'DahliantiAngelina', 'Playfair Display', serif;
+    font-size: 1.25rem;
+    text-transform: lowercase;
+    opacity: 0.95;
+    position: absolute;
+    right: -8px;
+    top: 62%;
+    transform: translateY(0);
+    white-space: nowrap;
+}
+
+@media (min-width:768px) {
+
+/* Footer signature tweaks */
+.footer-sig .signature-prefix {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    letter-spacing: 0.14em;
+}
+
+.footer-sig .signature-name {
+    font-family: 'Sephir', 'DahliantiAngelina', 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.25rem;
+    display: inline-block;
+    line-height: 1;
+}
+
+.footer-sig .signature-name.shiny-text {
+    /* ensure gradient clip respects font rendering */
+    -webkit-text-fill-color: transparent;
+}
+    .brand-logo {
+        padding-right: 0.75rem
+    }
+
+    .brand-logo .logo-shawo {
+        font-size: 2rem
+    }
+
+    .brand-logo .logo-suede {
+        font-size: 2.5rem;
+        right: 5px;
+        top: 38%
+    }
+
+    .text-center .brand-logo {
+        margin: 0 auto
+    }
+}
+
+/* Footer signature (handwritten, subtle) */
+.footer-sig {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--mutedgold);
+    opacity: 0.92;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: transform .18s ease, opacity .18s ease;
+}
+
+.footer-sig:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.signature-prefix {
+    font-size: 0.78rem;
+    color: rgba(33,58,47,0.7);
+    text-transform: lowercase;
+}
+
+.signature {
+    font-family: "Great Vibes", "Cinzel", cursive;
+    font-size: 1.05rem;
+    color: var(--mutedgold);
+    line-height: 1;
+}

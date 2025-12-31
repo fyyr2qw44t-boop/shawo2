@@ -1,0 +1,82 @@
+/* Rich serif heading styles — Option 1: Zengin Serif + Altın Vurgu */
+/* Applied to primary headings site-wide; can be scoped later if you prefer page-specific use */
+.heading-rich, .section-title {
+    @apply font-heading;
+    color: var(--mutedgold);
+    letter-spacing: 0.02em;
+    font-weight: 600;
+}
+
+h1 {
+    font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+    font-size: 2.75rem;
+    line-height: 1.05;
+    margin-bottom: 0.85rem;
+    position: relative;
+    color: var(--mutedgold);
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 3.5rem;
+    height: 2px;
+    background: linear-gradient(90deg, var(--mutedgold), rgba(191,166,122,0.9));
+    margin-top: 0.5rem;
+    border-radius: 2px;
+    transform-origin: left;
+    transform: translateY(6px) scaleX(0);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: underline-in .6s cubic-bezier(.2,.9,.3,1) .12s forwards;
+} 
+
+h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: rgba(33,58,47,0.95);
+    letter-spacing: 0.01em;
+    margin-top: 1.25rem;
+}
+
+/* responsive scale-up for larger viewports */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* underline animation */
+@keyframes underline-in {
+    0% {
+        transform: translateY(6px) scaleX(0);
+        opacity: 0;
+    }
+    60% {
+        transform: translateY(2px) scaleX(1.02);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0) scaleX(1);
+        opacity: 1;
+    }
+}
+
+/* Optional glass heading variant for a subtle frosted panel */
+.glass-heading {
+    display: inline-block;
+    padding: 0.35rem 0.6rem;
+    border-radius: 0.5rem;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(6px) saturate(1.05);
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+}
+
+/* re-trigger animation on hover for repeatable effect */
+h1:hover::after, .glass-heading:hover::after {
+    animation: underline-in .5s cubic-bezier(.2,.9,.3,1) .06s forwards;
+}
